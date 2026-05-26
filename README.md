@@ -1,23 +1,17 @@
 # gym_manage
 
-Gym Management System MVP built with FastAPI and SQLite.
+Gym Management System MVP with a FastAPI backend and React dashboard frontend.
 
 ## Features
 
-- Membership plans with four tiers:
-  - VIP
-  - Gold
-  - Silver
-  - Normal
+- Membership plans with four tiers: VIP, Gold, Silver, Normal
 - Member management
 - Staff management (management, trainer, sales roles)
 - Trainer weekly schedule management
 - Personal trainer to member assignment
-- Appointment booking with conflict checks
+- Appointment booking with conflict checks and status updates
 - Inventory management and stock adjustments
-- Sales management:
-  - Member sales
-  - Walk-in sales
+- Sales management (member sales + walk-in sales)
 - Automatic stock deduction for sales
 
 ## Project Structure
@@ -35,50 +29,57 @@ backend/
   tests/
     test_api.py
   requirements.txt
+
+frontend/
+  src/
+    App.tsx
+    api.ts
+    types.ts
+    styles.css
+  package.json
+  vite.config.ts
 ```
 
-## Quick Start
-
-1. Create and activate a virtual environment:
+## Run Backend API
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
-```
-
-2. Install dependencies:
-
-```bash
 pip install -r backend/requirements.txt
-```
-
-3. Run the API:
-
-```bash
 uvicorn backend.app.main:app --reload
 ```
 
-4. Open docs:
+API docs: `http://127.0.0.1:8000/docs`
 
-- Swagger UI: `http://127.0.0.1:8000/docs`
+## Run Frontend Dashboard
 
-## Core API Endpoints
+In a second terminal:
 
-- `GET /api/health`
-- `GET/POST /api/membership-plans`
-- `GET/POST/PATCH /api/members`
-- `GET/POST /api/staff`
-- `GET/POST /api/trainer-schedules`
-- `GET/POST /api/trainer-assignments`
-- `GET/POST/PATCH /api/appointments`
-- `GET/POST /api/inventory`
-- `POST /api/inventory/{item_id}/adjust`
-- `GET/POST /api/sales`
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Dashboard URL: `http://127.0.0.1:5173`
+
+Optional API base override:
+
+```bash
+VITE_API_BASE_URL=http://127.0.0.1:8000 npm run dev
+```
+
+## Frontend Dashboard Modules
+
+- **Members**: add members, view plans and member list
+- **Appointments Calendar**: weekly calendar, booking form, appointment status update
+- **Inventory POS**: add inventory, stock adjustments, member/walk-in sales
+- **Staff & Schedules**: add staff, configure trainer slots, assign personal trainers
 
 ## Tests
 
-Run tests with:
+Run backend tests:
 
 ```bash
-pytest backend/tests -q
+python3 -m pytest backend/tests -q
 ```
